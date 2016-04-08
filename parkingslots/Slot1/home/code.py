@@ -40,14 +40,15 @@ def change_lamp(status):
 while True:
 
 	cc = ser.read(1)
-        if len(cc)>0:
-        	time.sleep(5)
-        	status = change_lamp(status)
-           # ch = ord(cc)
-            print status
+	if len(cc)>0:
+		time.sleep(5)
 
-		    message = SLOT_ID + "/" + status
+		status = change_lamp(slot_status)
 
-		    print 'SENT: ' + message
+		print status
 
-	sock.sendto(message, (MCAST_GRP, MCAST_PORT))
+		message = SLOT_ID + "/" + status
+
+		print 'SENT: ' + message
+		
+		sock.sendto(message, (MCAST_GRP, MCAST_PORT))
