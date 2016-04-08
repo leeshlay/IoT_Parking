@@ -30,10 +30,10 @@ status = 0
 def change_lamp(status):
 	if status == 0:
 		status = 1
-		ser.write(chr(64+32+16))
+		ser.write(chr(64+32+16))	# red
 	else:
 		status = 0
-		ser.write(chr(64+8+4))
+		ser.write(chr(64+8+4))		# green
 
 	return status
 
@@ -43,7 +43,7 @@ while True:
 	if len(cc)>0:
 		time.sleep(5)
 
-		status = change_lamp(slot_status)
+		status = change_lamp(status)
 
 		print status
 

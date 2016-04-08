@@ -43,7 +43,7 @@ while True:
 	if len(cc)>0:
 		time.sleep(5)
 
-		status = change_lamp(slot_status)
+		status = change_lamp(status)
 
 		print status
 
