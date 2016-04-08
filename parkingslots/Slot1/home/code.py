@@ -46,8 +46,8 @@ while True:
            # ch = ord(cc)
             print status
 
-    message = SLOT_ID + "/" + status
+		    message = SLOT_ID + "/" + status
 
-    print 'SENT: ' + message
-    
-    sock.sendto(message, (MCAST_GRP, MCAST_PORT))
+		    print 'SENT: ' + message
+
+	sock.sendto(message, (MCAST_GRP, MCAST_PORT))
