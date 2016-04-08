@@ -23,6 +23,7 @@ ser = Serial(SERIAL_PATH, 38400)
 # ----- END INITIALIZATION ----- 
 
 myId = 8;
+ser.write(str(15))
 
 while True:
   command = sock.recv(10240)
