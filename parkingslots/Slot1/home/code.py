@@ -13,6 +13,7 @@ ser = Serial(SERIAL_PATH, 38400)
 
 import socket
 import time
+import thread
 
 MCAST_GRP = '236.0.0.0'
 MCAST_PORT = 3456
@@ -20,12 +21,27 @@ MCAST_PORT = 3456
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 2)    
 
+flag = 0
 
 ser.write(chr(128+1))
 
-SLOT_IT = 1
+SLOT_ID = 1
 
 status = 0
+ser.write(chr(64+8+4))		# green
+
+thread.start_new_thread( timer, () )
+
+def timer():
+	global flag
+
+	while True:
+		if flag == 0:
+			flag = 1
+		else:
+			flag = 0
+			time.sleep(3)
+
 
 def change_lamp(status):
 	if status == 0:
@@ -34,20 +50,20 @@ def change_lamp(status):
 	else:
 		status = 0
 		ser.write(chr(64+8+4))		# green
+		time.sleep(5)
 
 	return status
 
 while True:
 
 	cc = ser.read(1)
-	if len(cc)>0:
-		time.sleep(5)
+	if len(cc)>0 and flag == 1 :
 
 		status = change_lamp(status)
 
 		print status
 
-		message = SLOT_ID + "/" + status
+		message = str(SLOT_ID) + "/" + str(status)
 
 		print 'SENT: ' + message
 		
