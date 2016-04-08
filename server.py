@@ -6,8 +6,6 @@ from serial import Serial
 import socket
 import struct
 
-ser = serial.Serial('/dev/ttyS0', 38400, timeout=1)
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 SERIAL_PATH = os.path.join(BASE_DIR, 'dev', 'ttyS0')
 
@@ -29,15 +27,15 @@ sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 free_spots = [True,True,True,True,True,True,True,True,True,True]
 directions = {
                 1: {"1": "right"},
-                2: {"1": "mid", "2":"right"}
-                3: {"1": "mid", "2": "mid", "3":"right"}
-                4: {"1": "mid", "2": "left"}
-                5: {"1": "mid", "2": "mid", "3":"left"}
-                6: {"1": "left", "4": "mid", "5":"mid", "6":"right", "7":"right"}
-                7: {"1": "left", "4": "mid", "5":"mid", "6":"right", "7":"mid", "8":"right"}
-                8: {"1": "left", "4": "mid", "5":"mid", "6":"mid"}
-                9: {"1": "left", "4": "mid", "5":"mid", "6":"right", "7":"left"}
-               10: {"1": "left", "4": "mid", "5":"mid", "6":"right", "7":"mid", "8":"left"}
+                2: {"1": "mid", "2":"right"},
+                3: {"1": "mid", "2": "mid", "3":"right"},
+                4: {"1": "mid", "2": "left"},
+                5: {"1": "mid", "2": "mid", "3":"left"},
+                6: {"1": "left", "4": "mid", "5":"mid", "6":"right", "7":"right"},
+                7: {"1": "left", "4": "mid", "5":"mid", "6":"right", "7":"mid", "8":"right"},
+                8: {"1": "left", "4": "mid", "5":"mid", "6":"mid"},
+                9: {"1": "left", "4": "mid", "5":"mid", "6":"right", "7":"left"},
+               10: {"1": "left", "4": "mid", "5":"mid", "6":"right", "7":"mid", "8":"left"},
 }
 
 def set_fields(destination):
