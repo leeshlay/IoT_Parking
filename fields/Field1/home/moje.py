@@ -33,7 +33,6 @@ ser.write(chr(31))
 while True:
   command = sock.recv(128)
   info = command.split('/')
-  print info
   if info[0] == str(myId):
     if info[1] == "left":
       ser.write(chr(0))
