@@ -30,8 +30,6 @@ SLOT_ID = 3
 status = 0
 ser.write(chr(64+8+4))		# green
 
-thread.start_new_thread( timer, () )
-
 def timer():
 	global flag
 
@@ -53,6 +51,9 @@ def change_lamp(status):
 		time.sleep(5)
 
 	return status
+
+
+thread.start_new_thread( timer, () )
 
 while True:
 
