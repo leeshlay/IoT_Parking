@@ -48,7 +48,7 @@ def change_lamp(status):
 	else:
 		status = 0
 		ser.write(chr(64+8+4))		# green
-		time.sleep(5)
+	#	time.sleep(5)
 
 	return status
 
