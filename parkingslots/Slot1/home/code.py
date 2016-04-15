@@ -23,7 +23,7 @@ sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 2)
 
 flag = 0
 
-ser.write(chr(128+1))
+ser.write(chr(128+1))		#motion
 
 SLOT_ID = 1
 
@@ -53,12 +53,12 @@ def change_lamp(status):
 	return status
 
 
-thread.start_new_thread( timer, () )
+#thread.start_new_thread( timer, () )
 
 while True:
 
 	cc = ser.read(1)
-	if len(cc)>0 and flag == 1 :
+	if len(cc)>0 :
 
 		status = change_lamp(status)
 
