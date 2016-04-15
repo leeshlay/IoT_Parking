@@ -13,13 +13,17 @@ ser = Serial(SERIAL_PATH, 38400)
 
 import socket
 import time
+import struct
 
 MCAST_GRP = '236.0.0.0'
-MCAST_PORT = 3456
+MCAST_PORT = 3457
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
-sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 1)
-#sock.bind((MCAST_GRP,MCAST_PORT))
+sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+sock.bind(('', MCAST_PORT))
+mreq = struct.pack("4sl", socket.inet_aton(MCAST_GRP), socket.INADDR_ANY)
+sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
 
 # ----- END INITIALIZATION ----- 
 
@@ -27,14 +31,13 @@ myId = 1;
 ser.write(chr(31))
 
 while True:
-  command = sock.recv(10240)
-  print "Field1 " + command
+  command = sock.recv(128)
   info = command.split('/')
   print info
-  if info[0] == myId:
-    if info[1] == 'left':
+  if info[0] == str(myId):
+    if info[1] == "left":
       ser.write(chr(0))
-    elif info[1] == 'mid':
+    elif info[1] == "mid":
       ser.write(chr(15))
-    elif info[1] == 'right':
-     ser.write(chr(31))
+    elif info[1] == "right":
+      ser.write(chr(31))
