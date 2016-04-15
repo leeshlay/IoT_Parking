@@ -60,12 +60,14 @@ while True:
 	cc = ser.read(1)
 	if len(cc)>0 :
 
-		status = change_lamp(status)
+		if cc == chr(128+64+1):
 
-		print status
+			status = change_lamp(status)
 
-		message = str(SLOT_ID) + "/" + str(status)
+			print status
 
-		print 'SENT: ' + message
-		
-		sock.sendto(message, (MCAST_GRP, MCAST_PORT))
+			message = str(SLOT_ID) + "/" + str(status)
+
+			print 'SENT: ' + message
+			
+			sock.sendto(message, (MCAST_GRP, MCAST_PORT))
