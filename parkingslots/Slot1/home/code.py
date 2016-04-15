@@ -59,7 +59,7 @@ while True:
 
 	cc = ser.read(1)
 	if len(cc)>0 :
-
+		print cc
 		if cc == chr(128+64+1):
 
 			status = change_lamp(status)
