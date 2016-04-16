@@ -37,6 +37,6 @@ while True:
     if info[1] == "left":
       ser.write(chr(0))
     elif info[1] == "mid":
-      ser.write(chr(15))
+      ser.write(chr(18))
     elif info[1] == "right":
       ser.write(chr(31))
