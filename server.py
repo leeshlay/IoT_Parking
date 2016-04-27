@@ -6,10 +6,13 @@ import socket
 import struct
 import gdata.spreadsheet.service
 
+<<<<<<< Updated upstream
 import json
 import time
 import gspread
 from oauth2client.client import SignedJwtAssertionCredentials
+=======
+>>>>>>> Stashed changes
 
 # ----- END INITIALIZATION ----- 
 
@@ -41,6 +44,7 @@ MAX_PARK = 2
 
 free_spots = [True,True]
 directions = {
+                -1: {"1": "mid"},
                 1: {"1": "left"},
                 2: {"1": "right"}
 }
@@ -53,7 +57,6 @@ sheet_cells = {
 def set_fields(destination):
     for id in directions.get(destination):
         command = id + "/" + directions.get(destination).get(id);
-        #print "\n" + command + "\n"
         sock.sendto(command, (MCAST_GRP, MCAST_PORT+1))
 
 def choose_parking():
@@ -79,3 +82,4 @@ while True:
         set_fields(choose_parking()+1)
     else:
         print "Wszystkie miejsca zajete"
+        set_fields(-1)
