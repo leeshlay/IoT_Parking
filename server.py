@@ -6,6 +6,11 @@ import socket
 import struct
 import gdata.spreadsheet.service
 
+import json
+import time
+import gspread
+from oauth2client.client import SignedJwtAssertionCredentials
+
 # ----- END INITIALIZATION ----- 
 
 # ----- SOCKETS -----
@@ -20,12 +25,29 @@ sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 2)
 # -----
 
+# ----- GOOGLE SPREADSHEETS -----
+json_key = json.load(open('iot-first-third-0180cc30f0c9.json'))
+scope = ['https://spreadsheets.google.com/feeds']
+
+credentials = SignedJwtAssertionCredentials(json_key['client_email'], json_key['private_key'].encode(), scope)
+
+gc = gspread.authorize(credentials)
+
+# Open a worksheet from spreadsheet with one shot
+wks = gc.open("Parking").sheet1
+# -----
+
 MAX_PARK = 2
 
 free_spots = [True,True]
 directions = {
                 1: {"1": "left"},
                 2: {"1": "right"}
+}
+
+sheet_cells = {
+                1: "C3",
+                2: "E3"
 }
 
 def set_fields(destination):
@@ -52,7 +74,7 @@ while True:
     elif is_on == "0":
         print str(dev_id) + " wolne"
         free_spots[dev_id - 1] = True
-
+    wks.update_acell(sheet_cells[dev_id], is_on)
     if choose_parking() >= 0 :
         set_fields(choose_parking()+1)
     else:
