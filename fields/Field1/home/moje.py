@@ -28,7 +28,7 @@ sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 # ----- END INITIALIZATION ----- 
 
 myId = 1;
-ser.write(chr(31))
+ser.write(chr(0))
 
 while True:
   command = sock.recv(128)

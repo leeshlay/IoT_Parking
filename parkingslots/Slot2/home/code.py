@@ -48,7 +48,6 @@ def change_lamp(status):
 	else:
 		status = 0
 		ser.write(chr(64+8+4))		# green
-	#	time.sleep(5)
 
 	return status
 
@@ -71,3 +70,4 @@ while True:
 			print 'SENT: ' + message
 			
 			sock.sendto(message, (MCAST_GRP, MCAST_PORT))
+			#time.sleep(5)

@@ -6,13 +6,10 @@ import socket
 import struct
 import gdata.spreadsheet.service
 
-<<<<<<< Updated upstream
 import json
 import time
 import gspread
 from oauth2client.client import SignedJwtAssertionCredentials
-=======
->>>>>>> Stashed changes
 
 # ----- END INITIALIZATION ----- 
 
