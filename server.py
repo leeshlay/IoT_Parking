@@ -4,6 +4,7 @@
 import os
 import socket
 import struct
+import gdata.spreadsheet.service
 
 # ----- END INITIALIZATION ----- 
 
@@ -19,13 +20,12 @@ sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 2)
 # -----
 
-MAX_PARK = 3
+MAX_PARK = 2
 
-free_spots = [True,True,True]
+free_spots = [True,True]
 directions = {
-                1: {"1": "right"},
-                2: {"1": "mid", "2":"right"},
-                3: {"1": "mid", "2":"left"}
+                1: {"1": "left"},
+                2: {"1": "right"}
 }
 
 def set_fields(destination):
